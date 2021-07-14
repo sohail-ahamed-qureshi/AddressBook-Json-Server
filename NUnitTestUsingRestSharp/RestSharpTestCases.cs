@@ -92,5 +92,34 @@ namespace NUnitTestUsingRestSharp
                 Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
             }
         }
+
+
+        [Test]
+        public void PassPUTRequest_ReturnsStatusCreated()
+        {
+            //arrange
+            Contacts contacts = new Contacts
+            {
+                FirstName = "suresh",
+                LastName = "babu",
+                Address = "some where",
+                City = "bangalore",
+                State = "Karnataka",
+                ZipCode = 876540,
+                PhoneNumber = 6668888222,
+                Email = "babusuresh@yahoo.com"
+            };
+            //act
+            RestRequest request = new RestRequest("/Contacts/1", Method.PUT);
+            object jObject = JsonConvert.SerializeObject(contacts, Formatting.Indented);
+            request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            //assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Contacts contacts1 = JsonConvert.DeserializeObject<Contacts>(response.Content);
+            Assert.AreEqual("suresh", contacts1.FirstName);
+            Assert.AreEqual("babu", contacts1.LastName);
+        }
+
     }
 }

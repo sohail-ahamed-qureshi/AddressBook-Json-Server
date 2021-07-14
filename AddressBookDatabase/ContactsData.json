@@ -1,26 +1,7 @@
 {
   "Contacts": [
     {
-      "FirstName": "suresh",
-      "LastName": "babu",
-      "Address": "some where",
-      "City": "bangalore",
-      "State": "Karnataka",
-      "ZipCode": 876540,
-      "PhoneNumber": 6668888222,
-      "Email": "babusuresh@yahoo.com",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "firstName": "john",
-      "lastName": "doe",
-      "address": "Some where",
-      "city": "bellari",
-      "state": "Karnataka",
-      "zipCode": 123455,
-      "phoneNumber": 9876543221,
-      "email": "johnDoe123@gmail.com"
+      "id": 2
     },
     {
       "id": 3,
@@ -32,29 +13,6 @@
       "zipCode": 583201,
       "phoneNumber": 1234567890,
       "email": "singhramesh@gmail.com"
-    },
-    {
-      "firstName": "anandh",
-      "lastName": "singh",
-      "address": "some address",
-      "city": "hospet",
-      "state": "karnataka",
-      "zipCode": 583201,
-      "phoneNumber": 99994567890,
-      "email": "singhanandh@gmail.com",
-      "id": 4
-    },
-    {
-      "ContactId": 0,
-      "FirstName": "suresh",
-      "LastName": "babu",
-      "Address": "some where",
-      "City": "bangalore",
-      "State": "Karnataka",
-      "ZipCode": 876540,
-      "PhoneNumber": 6668888222,
-      "Email": "babusuresh@yahoo.com",
-      "id": 5
     },
     {
       "FirstName": "Sugresh",
@@ -99,17 +57,6 @@
       "PhoneNumber": 9764546412,
       "Email": "sugreshambani@gmail.com",
       "id": 9
-    },
-    {
-      "FirstName": "mahesh",
-      "LastName": "ambani",
-      "Address": "some where",
-      "City": "Bangalore",
-      "State": "Karnataka",
-      "ZipCode": 12341,
-      "PhoneNumber": 9764546412,
-      "Email": "sugreshambani@gmail.com",
-      "id": 10
     }
   ]
 }

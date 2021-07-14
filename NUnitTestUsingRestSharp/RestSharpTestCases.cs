@@ -95,7 +95,7 @@ namespace NUnitTestUsingRestSharp
 
 
         [Test]
-        public void PassPUTRequest_ReturnsStatusCreated()
+        public void PassPUTRequest_ReturnsStatusOK()
         {
             //arrange
             Contacts contacts = new Contacts
@@ -119,6 +119,21 @@ namespace NUnitTestUsingRestSharp
             Contacts contacts1 = JsonConvert.DeserializeObject<Contacts>(response.Content);
             Assert.AreEqual("suresh", contacts1.FirstName);
             Assert.AreEqual("babu", contacts1.LastName);
+        }
+
+        [Test]
+        public void PassDELETERequest_ReturnsStatusOK()
+        {
+            //arrange
+            int id = 1;
+            RestRequest request = new RestRequest("/Contacts/" + id, Method.DELETE);
+            //act
+            IRestResponse response = client.Execute(request);
+            //assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            response = GetResponse();
+            List<Contacts> contactsList = JsonConvert.DeserializeObject<List<Contacts>>(response.Content);
+            Assert.AreEqual(6, contactsList.Count);
         }
 
     }

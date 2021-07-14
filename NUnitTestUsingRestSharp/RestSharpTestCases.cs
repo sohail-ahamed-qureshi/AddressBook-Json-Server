@@ -34,12 +34,39 @@ namespace NUnitTestUsingRestSharp
             //assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             List<Contacts> contactsList = JsonConvert.DeserializeObject<List<Contacts>>(response.Content);
-            Assert.AreEqual(4,contactsList.Count);
+            Assert.AreEqual(4, contactsList.Count);
 
             foreach (Contacts contact in contactsList)
             {
-                System.Console.WriteLine(contact.FirstName+" " +contact.LastName + " " +contact.Address + " " +contact.City + " " +contact.State + " " +contact.ZipCode + " " +contact.PhoneNumber + " " +contact.Email);
+                System.Console.WriteLine(contact.FirstName + " " + contact.LastName + " " + contact.Address + " " + contact.City + " " + contact.State + " " + contact.ZipCode + " " + contact.PhoneNumber + " " + contact.Email);
             }
+        }
+
+        [Test]
+        public void PassPOSTRequest_ReturnsStatusCreated()
+        {
+            //arrange
+            Contacts contacts = new Contacts
+            {
+                FirstName = "suresh",
+                LastName = "babu",
+                Address = "some where",
+                City = "bangalore",
+                State = "Karnataka",
+                ZipCode = 876540,
+                PhoneNumber = 6668888222,
+                Email = "babusuresh@yahoo.com"
+            };
+            //act
+            RestRequest request = new RestRequest("/Contacts", Method.POST);
+            object jObject = JsonConvert.SerializeObject(contacts, Formatting.Indented);
+            request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            //assert
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            Contacts contacts1 = JsonConvert.DeserializeObject<Contacts>(response.Content);
+            Assert.AreEqual("suresh", contacts1.FirstName);
+            Assert.AreEqual("babu", contacts1.LastName);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace NUnitTestUsingRestSharp
             //assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             List<Contacts> contactsList = JsonConvert.DeserializeObject<List<Contacts>>(response.Content);
-            Assert.AreEqual(4, contactsList.Count);
+            Assert.AreEqual(5, contactsList.Count);
 
             foreach (Contacts contact in contactsList)
             {
@@ -67,6 +67,30 @@ namespace NUnitTestUsingRestSharp
             Contacts contacts1 = JsonConvert.DeserializeObject<Contacts>(response.Content);
             Assert.AreEqual("suresh", contacts1.FirstName);
             Assert.AreEqual("babu", contacts1.LastName);
+        }
+        [Test]
+        public void PassPOSTRequestAddMultipleContacts_ReturnsStatusCreated()
+        {
+            //arrange
+            List<Contacts> contactsList = new List<Contacts>
+            {
+                new Contacts(){FirstName= "Sugresh", LastName ="ambani", Address = "some where", City = "Bangalore", State = "Karnataka", ZipCode = 12341, PhoneNumber = 09764546412, Email = "sugreshambani@gmail.com"},
+                new Contacts(){FirstName= "mahesh", LastName ="ambani", Address = "some where", City = "Bangalore", State = "Karnataka", ZipCode = 12341, PhoneNumber = 09764546412, Email = "sugreshambani@gmail.com"},
+                new Contacts(){FirstName= "ramesh", LastName ="ambani", Address = "some where", City = "Bangalore", State = "Karnataka", ZipCode = 12341, PhoneNumber = 09764546412, Email = "sugreshambani@gmail.com"},
+                new Contacts(){FirstName= "Suresh", LastName ="ambani", Address = "some where", City = "Bangalore", State = "Karnataka", ZipCode = 12341, PhoneNumber = 09764546412, Email = "sugreshambani@gmail.com"},
+                new Contacts(){FirstName= "mahesh", LastName ="ambani", Address = "some where", City = "Bangalore", State = "Karnataka", ZipCode = 12341, PhoneNumber = 09764546412, Email = "sugreshambani@gmail.com"}
+            };
+            IRestResponse response;
+            //act
+            foreach (Contacts contact1 in contactsList)
+            {
+                RestRequest request = new RestRequest("/Contacts", Method.POST);
+                object jObject = JsonConvert.SerializeObject(contact1, Formatting.Indented);
+                request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+                response = client.Execute(request);
+                //assert
+                Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            }
         }
     }
 }
